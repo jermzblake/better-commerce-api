@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node index.ts"
+    "start": "ts-node index.ts",
+    "docker:dev": "docker-compose up --build"
   },
   "dependencies": {
     "@koa/cors": "^4.0.0",
