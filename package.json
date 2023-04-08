@@ -7,7 +7,11 @@
     "build": "tsc",
     "index": "ts-node index.ts",
     "start": "ts-node src/server/server.ts",
-    "docker:dev": "docker-compose up --build"
+    "docker:dev": "docker-compose up --build",
+    "dev": "yarn migrate:latest && cross-env NODE_ENV=development nodemon --watch 'src/**/*' -e ts --exec 'ts-node' src/server/server.ts",
+    "migrate:new": "yarn knex migrate:make $1",
+    "migrate:latest": "yarn knex migrate:latest",
+    "migrate:rollback": "yarn knex migrate:rollback"
   },
   "dependencies": {
     "@koa/cors": "^4.0.0",
