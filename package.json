@@ -8,7 +8,7 @@
     "index": "ts-node index.ts",
     "start": "node dist/src/server/server.js",
     "docker:dev": "docker-compose up --build",
-    "dev": "yarn migrate:dev && cross-env NODE_ENV=development nodemon --watch 'src/**/*' -e ts --exec 'ts-node' src/server/server.ts",
+    "dev": "cross-env NODE_ENV=development nodemon --watch 'src/**/*' -e ts --exec 'ts-node' src/server/server.ts",
     "migrate:dev": "yarn prisma migrate dev --name $1",
     "migrate:reset": "yarn prisma migrate reset",
     "migrate:prod": "yarn prisma migrate deploy",
