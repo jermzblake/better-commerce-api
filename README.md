@@ -20,7 +20,7 @@ Adds environment variables
 
 Runs all the database migrations
 
-### `yarn migrate:latest`
+### `yarn migrate:dev init`
 
 Runs all the database migrations
 
