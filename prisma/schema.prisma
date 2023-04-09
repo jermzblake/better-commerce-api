@@ -47,10 +47,19 @@ model Order_Item {
 
 model Product {
   id String @id @default(cuid())
+  categories Category []
   name String
   description String
   price Decimal @db.Money
   created_at  DateTime @default(now())
   updated_at DateTime @updatedAt
   order_items Order_Item[]
+}
+
+model Category {
+  id String @id @default(cuid())
+  name String @db.VarChar(255)
+  created_at  DateTime @default(now())
+  updated_at DateTime @updatedAt
+  products Product[]
 }
