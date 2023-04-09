@@ -6,15 +6,17 @@
   "scripts": {
     "build": "tsc",
     "index": "ts-node index.ts",
-    "start": "ts-node src/server/server.ts",
+    "start": "node dist/src/server/server.js",
     "docker:dev": "docker-compose up --build",
-    "dev": "yarn migrate:latest && cross-env NODE_ENV=development nodemon --watch 'src/**/*' -e ts --exec 'ts-node' src/server/server.ts",
-    "migrate:new": "yarn knex migrate:make $1",
-    "migrate:latest": "yarn knex migrate:latest",
-    "migrate:rollback": "yarn knex migrate:rollback"
+    "dev": "cross-env NODE_ENV=development nodemon --watch 'src/**/*' -e ts --exec 'ts-node' src/server/server.ts",
+    "migrate:dev": "yarn prisma migrate dev --name $1",
+    "migrate:reset": "yarn prisma migrate reset",
+    "migrate:prod": "yarn prisma migrate deploy",
+    "migrate:create-only": "yarn prisma migrate dev --create-only"
   },
   "dependencies": {
     "@koa/cors": "^4.0.0",
+    "@prisma/client": "^4.12.0",
     "@types/jsonwebtoken": "^9.0.1",
     "@types/koa": "^2.13.6",
     "@types/koa-bodyparser": "^4.3.10",
@@ -31,6 +33,7 @@
     "koa-router": "^12.0.0",
     "nodemon": "^2.0.22",
     "pg": "^8.10.0",
+    "prisma": "^4.12.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4",
     "winston": "^3.8.2"
