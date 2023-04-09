@@ -47,7 +47,7 @@ model Order_Item {
 
 model Product {
   id String @id @default(cuid())
-  categories Category []
+  categories Category[]
   name String
   description String
   price Decimal @db.Money
