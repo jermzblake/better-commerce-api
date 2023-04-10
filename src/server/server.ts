@@ -4,6 +4,7 @@ import { app } from './main'
 import * as logger from '../utils/logger'
 import { config } from './config'
 import { BetterError } from '../lib'
+import * as DataPreload from '../middleware/data.preload'
 
 function normalizePort(val: string) {
     const port = parseInt(val, 10)
@@ -35,4 +36,5 @@ server.on('uncaughtException', (e: Error) => {
 })
 
 server.listen(config.port);
+Promise.resolve(DataPreload.dataPreload())
 logger.info(`Server is running at http://localhost:${config.port}/`, __filename);
