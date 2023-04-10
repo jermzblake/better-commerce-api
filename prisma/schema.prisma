@@ -51,6 +51,8 @@ model Product {
   name String
   description String
   price Decimal @db.Money
+  quantity Int
+  media Json?
   created_at  DateTime @default(now())
   updated_at DateTime @updatedAt
   order_items Order_Item[]
