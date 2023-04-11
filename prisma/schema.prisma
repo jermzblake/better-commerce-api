@@ -19,6 +19,7 @@ model Customer {
   phone_number String?  @db.VarChar(50)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  deleted_at DateTime?
   orders Order[]
 }
 
@@ -30,6 +31,7 @@ model Order {
   total_amount Decimal @db.Money
   created_at  DateTime @default(now())
   updated_at DateTime @updatedAt
+  deleted_at DateTime?
   order_items Order_Item[]
 }
 
@@ -43,6 +45,7 @@ model Order_Item {
   price_per_unit Decimal @db.Money
   created_at  DateTime @default(now())
   updated_at DateTime @updatedAt
+  deleted_at DateTime?
 }
 
 model Product {
@@ -55,6 +58,7 @@ model Product {
   media Json?
   created_at  DateTime @default(now())
   updated_at DateTime @updatedAt
+  deleted_at DateTime?
   order_items Order_Item[]
 }
 
@@ -63,5 +67,6 @@ model Category {
   name String @unique @db.VarChar(255)
   created_at  DateTime @default(now())
   updated_at DateTime @updatedAt
+  deleted_at DateTime?
   products Product[]
 }
