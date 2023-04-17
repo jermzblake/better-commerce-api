@@ -60,11 +60,22 @@ model Product {
   updated_at DateTime @updatedAt
   deleted_at DateTime?
   order_items Order_Item[]
+  size_name Size @relation(fields: [size], references: [name])
+  size String
 }
 
 model Category {
   id String @id @default(cuid())
   name String @unique @db.VarChar(255)
+  created_at  DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
+  products Product[]
+}
+
+model Size {
+  id Int @id @default(autoincrement())
+  name String @unique @db.VarChar(50)
   created_at  DateTime @default(now())
   updated_at DateTime @updatedAt
   deleted_at DateTime?
