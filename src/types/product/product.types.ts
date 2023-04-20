@@ -5,8 +5,9 @@ export interface Product extends BusinessObject {
   description: string
   price: number
   quantity: number
+  size: string
   media?: ProductMedia
-  categories: Category[]
+  categories?: Category[]
   orderItems?: OrderItem[]
 }
 
@@ -15,14 +16,13 @@ export interface ProductEntity extends Entity {
   description: string
   price: number
   quantity: number
-  media?: ProductMedia
-  categories: CategoryEntity[]
-  order_items?: OrderItemEntity[]
+  size: string
+  media?: any
 }
 
 export interface ProductMedia {
-  thumbnail: string
-  hero: string
-  images?: string[]
-  video?: string[]
+  "thumbnail": string
+  "hero": string
+  "images"?: string[]
+  "video"?: string[]
 }
