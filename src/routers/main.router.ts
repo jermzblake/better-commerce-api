@@ -4,9 +4,10 @@ import fs from 'fs'
 
 import { authMiddleware } from '../middleware'
 /* IMPORT ROUTERS BELOW */
+import ProductRouter from './product/product.router'
 
 const router = new Router({
-    prefix: '/v1'
+    prefix: '/api'
 })
 
 router.get('/', (ctx: Context) => {
@@ -37,5 +38,7 @@ router
     .use(AdminRouter.routes())
     .use(AdminRouter.allowedMethods())
     */
+   .use(ProductRouter.routes())
+   .use(ProductRouter.allowedMethods())
 
 export default router
