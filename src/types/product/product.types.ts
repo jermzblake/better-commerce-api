@@ -1,12 +1,13 @@
 import { BusinessObject, Entity, Category, CategoryEntity, OrderItem, OrderItemEntity } from '../index'
+import { Prisma, Category as CategoryModel } from '@prisma/client'
 
 export interface Product extends BusinessObject {
   name: string
   description: string
-  price: number
+  price: Prisma.Decimal
   quantity: number
   size: string
-  media?: ProductMedia
+  media?: any
   categories?: Category[]
   orderItems?: OrderItem[]
 }
@@ -14,7 +15,7 @@ export interface Product extends BusinessObject {
 export interface ProductEntity extends Entity {
   name: string
   description: string
-  price: number
+  price: Prisma.Decimal
   quantity: number
   size: string
   media?: any
