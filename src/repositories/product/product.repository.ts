@@ -1,5 +1,6 @@
 import { db } from '../../server/db'
 import { ProductEntity, CategoryEntity, PagingParams } from '../../types'
+import { Product as ProductModel } from '@prisma/client'
 
 export const fetchProducts = async (params?: PagingParams) => {
   if (params) {
@@ -24,5 +25,15 @@ export const fetchProductById = async (productId: string) => {
 
 export const createProduct = async (product: ProductEntity, categories?: CategoryEntity[]) => {
   const result = await db.product.create({ data: { ...product, categories: { connect: categories } } })
+  return result
+}
+
+export const updateProduct = async (productId: string, product: ProductEntity, categories?: CategoryEntity[]) => {
+  const result = await db.product.update({ where: {id: productId}, data: {...product, categories: { connect: categories }} })
+  return result
+}
+
+export const deleteProduct = async (productId: string): Promise<ProductModel[]> => {
+  const result: ProductModel[] = await db.$queryRaw`UPDATE "Product" SET deleted_at = 'now()' WHERE id = ${productId} RETURNING *;`
   return result
 }
