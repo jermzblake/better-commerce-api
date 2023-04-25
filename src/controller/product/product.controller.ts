@@ -26,6 +26,20 @@ export const updateProduct = async (ctx: Context) => {
   ctx.body = product
 }
 
+export const increaseProductQuantity = async (ctx: Context) => {
+  const { productId, value } = ctx.params
+  const valueNumber = parseInt(value)
+  const product = await productService.increaseProductQuantity(productId, valueNumber)
+  ctx.body = product
+}
+
+export const decreaseProductQuantity = async (ctx: Context) => {
+  const { productId, value } = ctx.params
+  const valueNumber = parseInt(value)
+  const product = await productService.decreaseProductQuantity(productId, valueNumber)
+  ctx.body = product
+}
+
 export const deleteProduct = async (ctx: Context) => {
   const { productId } = ctx.params
   const product = await productService.deleteProduct(productId)

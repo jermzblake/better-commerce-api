@@ -3,6 +3,7 @@ import { Product as ProductModel } from '@prisma/client'
 import * as productRepository from  '../../repositories/product/product.repository'
 import { mapProductEntityFromProduct, mapProductFromProductModel } from '../../dataMappers/product/product.mappers'
 import { NotFoundError } from '../../lib'
+import { db } from 'server/db'
 
 export const findProducts = async (params?: PagingParams): Promise<PagingParams | Product[]> => {
   const result = await productRepository.fetchProducts(params)
@@ -30,6 +31,16 @@ export const createProduct = async (product: Product) => {
 export const updateProduct = async (productId: string, product: Product) => {
   const productEntity = mapProductEntityFromProduct(product)
   const db_response = await productRepository.updateProduct(productId, productEntity, product.categories)
+  return mapProductFromProductModel(db_response)
+}
+
+export const increaseProductQuantity = async (productId: string, value: number) => {
+  const db_response = await productRepository.increaseProductQuantity(productId, value)
+  return mapProductFromProductModel(db_response)
+}
+
+export const decreaseProductQuantity = async (productId: string, value: number) => {
+  const db_response = await productRepository.decreaseProductQuantity(productId, value)
   return mapProductFromProductModel(db_response)
 }
 

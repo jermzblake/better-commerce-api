@@ -33,6 +33,16 @@ export const updateProduct = async (productId: string, product: ProductEntity, c
   return result
 }
 
+export const increaseProductQuantity = async (productId: string, value: number) => {
+  const result = await db.product.update({ where: {id: productId}, data: { quantity: { increment: value }} })
+  return result
+}
+
+export const decreaseProductQuantity = async (productId: string, value: number) => {
+  const result = await db.product.update({ where: {id: productId}, data: { quantity: { decrement: value }} })
+  return result
+}
+
 export const deleteProduct = async (productId: string): Promise<ProductModel[]> => {
   const result: ProductModel[] = await db.$queryRaw`UPDATE "Product" SET deleted_at = 'now()' WHERE id = ${productId} RETURNING *;`
   return result
