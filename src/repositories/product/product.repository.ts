@@ -19,7 +19,7 @@ export const fetchProducts = async (params?: PagingParams) => {
 }
 
 export const fetchProductById = async (productId: string) => {
-  const result = await db.product.findFirst({ where: { id: productId }, include: { categories: true } })
+  const result = await db.product.findFirst({ where: { id: productId, deleted_at: null }, include: { categories: true } })
   return result
 }
 
