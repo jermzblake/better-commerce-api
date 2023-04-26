@@ -1,17 +1,17 @@
-import { BusinessObject, Entity, OrderItem, OrderItemEntity } from '../index'
+import { BusinessObject, Entity, OrderItem } from '../index'
+import { Prisma } from '@prisma/client'
 
 export interface Order extends BusinessObject {
   customerId: string
-  shippingAddress: ShippingAddress
-  totalAmount: number
+  shippingAddress: any
+  totalAmount: Prisma.Decimal
   orderItems?: OrderItem[]
 }
 
 export interface OrderEntity extends Entity {
   customer_id: string
-  shipping_address: ShippingAddress
-  total_amount: number
-  order_items: OrderItemEntity
+  shipping_address: any
+  total_amount: Prisma.Decimal
 }
 
 export interface ShippingAddress {
