@@ -3,15 +3,13 @@ import { Product as ProductModel } from '@prisma/client'
 import * as productRepository from  '../../repositories/product/product.repository'
 import { mapProductEntityFromProduct, mapProductFromProductModel } from '../../dataMappers/product/product.mappers'
 import { NotFoundError } from '../../lib'
-import { db } from 'server/db'
 
 export const findProducts = async (params?: PagingParams): Promise<PagingParams | Product[]> => {
   const result = await productRepository.fetchProducts(params)
   if (params) {
     return {...result, data: (result as PagingParams)?.data?.map((product: ProductModel) => mapProductFromProductModel(product))}
   }
-  const products = await productRepository.fetchProducts()
-  return (products as ProductModel[]).map((product) => mapProductFromProductModel(product))
+  return (result as ProductModel[]).map((product) => mapProductFromProductModel(product))
 }
 
 export const findProductById = async (productId: string) => {

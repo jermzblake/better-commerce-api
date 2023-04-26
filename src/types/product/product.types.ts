@@ -1,5 +1,5 @@
-import { BusinessObject, Entity, Category, CategoryEntity, OrderItem, OrderItemEntity } from '../index'
-import { Prisma, Category as CategoryModel } from '@prisma/client'
+import { BusinessObject, Entity, Category, OrderItem } from '../index'
+import { Prisma } from '@prisma/client'
 
 export interface Product extends BusinessObject {
   name: string
