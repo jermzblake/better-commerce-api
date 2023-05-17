@@ -39,8 +39,8 @@ model Customer {
 
 model Order {
   id String @id @default(cuid())
-  customer Customer @relation(fields: [customer_id], references: [id])
-  customer_id String
+  customer Customer? @relation(fields: [customer_id], references: [id])
+  customer_id String?
   shipping_address Json?
   total_amount Decimal @db.Money
   created_at  DateTime @default(now())
