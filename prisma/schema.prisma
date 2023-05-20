@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Member {
   id String @id @default(cuid())
   email String @unique  @db.VarChar(255)
   first_name String  @db.VarChar(255)
@@ -20,27 +20,17 @@ model User {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   deleted_at DateTime?
-  customers Customer[]
-}
-
-model Customer {
-  id String @id @default(cuid())
-  email String @db.VarChar(255)
-  first_name String  @db.VarChar(255)
-  last_name String  @db.VarChar(255)
-  phone_number String?  @db.VarChar(50)
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  deleted_at DateTime?
   orders Order[]
-  user User? @relation(fields: [user_id], references: [id])
-  user_id String?
 }
 
 model Order {
   id String @id @default(cuid())
-  customer Customer? @relation(fields: [customer_id], references: [id])
-  customer_id String?
+  member Member? @relation(fields: [member_id], references: [id])
+  member_id String?
+  customer_email String @db.VarChar(255)
+  customer_first_name String  @db.VarChar(255)
+  customer_last_name String  @db.VarChar(255)
+  customer_phone_number String?  @db.VarChar(50)
   shipping_address Json?
   total_amount Decimal @db.Money
   created_at  DateTime @default(now())
