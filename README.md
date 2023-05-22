@@ -18,7 +18,7 @@ Adds environment variables
 
 ### `yarn docker:dev`
 
-Runs all the database migrations
+Starts Docker image of Postgres (attaching configured db)
 
 ### `yarn migrate:dev init`
 
