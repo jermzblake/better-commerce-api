@@ -37,6 +37,8 @@ model Order {
   updated_at DateTime @updatedAt
   deleted_at DateTime?
   order_items Order_Item[]
+  status_name Status @relation(fields: [status], references: [name])
+  status String
 }
 
 model Order_Item {
@@ -84,4 +86,13 @@ model Size {
   updated_at DateTime @updatedAt
   deleted_at DateTime?
   products Product[]
+}
+
+model Status {
+  id Int @id @default(autoincrement())
+  name String @unique @db.VarChar(50)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
+  orders Order[]
 }
