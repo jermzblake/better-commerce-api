@@ -4,6 +4,12 @@ import * as productRepository from  '../../repositories/product/product.reposito
 import { mapProductEntityFromProduct, mapProductFromProductModel } from '../../dataMappers/product/product.mappers'
 import { NotFoundError } from '../../lib'
 
+export const createProduct = async (product: Product) => {
+  const productEntity = mapProductEntityFromProduct(product)
+  const db_response = await productRepository.createProduct(productEntity, product.categories)
+  return mapProductFromProductModel(db_response)
+}
+
 export const findProducts = async (params?: PagingParams): Promise<PagingParams | Product[]> => {
   const result = await productRepository.fetchProducts(params)
   if (params) {
@@ -17,12 +23,6 @@ export const findProductById = async (productId: string) => {
   if (db_response == null) {
     throw new NotFoundError(__filename, `Product with ID ${productId} does not exist`)
   }
-  return mapProductFromProductModel(db_response)
-}
-
-export const createProduct = async (product: Product) => {
-  const productEntity = mapProductEntityFromProduct(product)
-  const db_response = await productRepository.createProduct(productEntity, product.categories)
   return mapProductFromProductModel(db_response)
 }
 

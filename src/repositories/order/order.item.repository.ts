@@ -2,6 +2,11 @@ import { db } from '../../server/db'
 import { Order_Item as OrderItemModel } from '@prisma/client'
 import { OrderItemEntity } from '../../types'
 
+export const createOrderItem = async (orderItem: OrderItemEntity) => {
+  const result = await db.order_Item.create({ data: { ...orderItem } })
+  return result
+}
+
 export const fetchOrderItemsByOrderId = async (orderId: string) => {
   const result = await db.order_Item.findMany({ where: { deleted_at: null, order_id: orderId } })
   return result
@@ -9,11 +14,6 @@ export const fetchOrderItemsByOrderId = async (orderId: string) => {
 
 export const fetchOrderItemById = async (orderItemId: string) => {
   const result = await db.order_Item.findFirst({ where: { id: orderItemId, deleted_at: null }})
-  return result
-}
-
-export const createOrderItem = async (orderItem: OrderItemEntity) => {
-  const result = await db.order_Item.create({ data: { ...orderItem } })
   return result
 }
 

@@ -2,6 +2,11 @@ import { Context } from 'koa'
 import * as productService from '../../services/product/product.service'
 import { Product, PagingParams } from '../../types'
 
+export const createProduct = async (ctx: Context) => {
+  const product = await productService.createProduct(ctx.request.body as Product)
+  ctx.body = product
+}
+
 export const getProducts = async (ctx: Context) => {
   const query = ctx.query as any
   const params: PagingParams | undefined = query.page !== undefined ? { page: query.page, pageSize: parseInt(query.pageSize), dir: query.dir, sort: query.sort } : undefined
@@ -12,11 +17,6 @@ export const getProducts = async (ctx: Context) => {
 export const getProductById = async (ctx: Context) => {
   const { productId } = ctx.params
   const product: Product = await productService.findProductById(productId)
-  ctx.body = product
-}
-
-export const createProduct = async (ctx: Context) => {
-  const product = await productService.createProduct(ctx.request.body as Product)
   ctx.body = product
 }
 

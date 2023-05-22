@@ -2,6 +2,11 @@ import { db } from '../../server/db'
 import { Order as OrderModel } from '@prisma/client'
 import { OrderEntity, OrderItemEntity, PagingParams } from '../../types'
 
+export const createOrder = async (order: OrderEntity, orderItems?: OrderItemEntity[]) => {
+  const result = await db.order.create({ data: { ...order, order_items: { connect: orderItems } } })
+  return result
+}
+
 export const fetchOrders = async (params?: PagingParams) => {
   if (params) {
     const offset = (params.page < 1 ? 1 : params.page - 1) * params.pageSize
@@ -20,11 +25,6 @@ export const fetchOrders = async (params?: PagingParams) => {
 
 export const fetchOrderById = async (orderId: string) => {
   const result = await db.order.findFirst({ where: { id: orderId, deleted_at: null }, include: { order_items: true } })
-  return result
-}
-
-export const createOrder = async (order: OrderEntity, orderItems?: OrderItemEntity[]) => {
-  const result = await db.order.create({ data: { ...order, order_items: { connect: orderItems } } })
   return result
 }
 

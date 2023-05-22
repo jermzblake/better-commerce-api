@@ -14,9 +14,9 @@ const router = new Router({
   prefix: '/products',
 })
 
+router.post('/', createProduct)
 router.get('/', getProducts)
 router.get('/:productId', getProductById)
-router.post('/', createProduct)
 router.put('/:productId', updateProduct)
 router.put('/:productId/increase/:value', increaseProductQuantity)
 router.put('/:productId/decrease/:value', decreaseProductQuantity)
