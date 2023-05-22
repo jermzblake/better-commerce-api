@@ -6,6 +6,14 @@ The API layer that handles backend functions. This node backend utilizes a postg
 
 Docker
 
+## Stack
+
+- Node
+- Typescript
+- Postgres
+- Koa
+- Prisma 
+
 ## Scripts
 
 ### `yarn`
