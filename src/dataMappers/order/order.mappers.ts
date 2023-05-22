@@ -11,6 +11,7 @@ export const mapOrderEntityFromOrder = (order: Order): OrderEntity => {
     customer_first_name: order.customerFirstName, 
     customer_last_name: order.customerLastName, 
     customer_phone_number: order.customerPhoneNumber as string,
+    status: order.status
   }
 }
 
@@ -24,6 +25,7 @@ export const mapOrderFromOrderModel = ( model: (OrderModel & { orderItems: Order
     customerFirstName: model.customer_first_name,
     customerLastName: model.customer_last_name,
     customerPhoneNumber: model.customer_last_name,
+    status: model.status,
     orderItems: (model as OrderModel & { order_items: OrderItemModel[] }).order_items ? (model as OrderModel & { order_items: OrderItemModel[] }).order_items.map((orderItem) =>
     mapOrderItemFromOrderItemModel(orderItem)
   ) : undefined,

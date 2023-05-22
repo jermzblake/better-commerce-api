@@ -8,7 +8,7 @@ import { findProductById } from '../product/product.service'
 
 export const createOrder = async (order: Order): Promise<Order> => {
   const pendingOrderItems = order.orderItems
-  // order.status = 'pending'
+  order.status = 'pending'
   const orderEntity = mapOrderEntityFromOrder(order)
   const order_db_response = await orderRepository.createOrder(orderEntity)
   let createdOrderItems: OrderItem[] = []

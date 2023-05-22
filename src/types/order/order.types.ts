@@ -10,6 +10,7 @@ export interface Order extends BusinessObject {
   customerFirstName: string 
   customerLastName: string 
   customerPhoneNumber?: string
+  status: string
 }
 
 export interface OrderEntity extends Entity {
@@ -20,13 +21,14 @@ export interface OrderEntity extends Entity {
   customer_phone_number: string
   shipping_address: any
   total_amount: Prisma.Decimal
+  status: string
 }
 
 export interface ShippingAddress {
   street: string
-  apt?: string
+  code: string
   city: string
-  province: string
+  region: string
   country: string
   notes?: string
 }
