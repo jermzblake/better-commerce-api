@@ -3,17 +3,25 @@ import { Order, OrderEntity } from '../../types'
 
 export const mapOrderEntityFromOrder = (order: Order): OrderEntity => {
   return {
-    customer_id: order.customerId,
+    member_id: order.memberId,
     shipping_address: order.shippingAddress,
-    total_amount: order.totalAmount
+    total_amount: order.totalAmount,
+    customer_email: order.customerEmail,
+    customer_first_name: order.customerFirstName, 
+    customer_last_name: order.customerLastName, 
+    customer_phone_number: order.customerPhoneNumber as string,
   }
 }
 
 export const mapOrderFromOrderModel = ( model: (OrderModel & { orderItems: OrderItemModel[] }) | OrderModel): Order => {
   return {
     id: model.id,
-    customerId: model.customer_id,
+    memberId: model.member_id as string,
     shippingAddress: model.shipping_address,
-    totalAmount: model.total_amount
+    totalAmount: model.total_amount,
+    customerEmail: model.customer_email,
+    customerFirstName: model.customer_first_name,
+    customerLastName: model.customer_last_name,
+    customerPhoneNumber: model.customer_last_name,
   }
 }
