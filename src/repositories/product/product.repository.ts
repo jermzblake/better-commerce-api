@@ -10,11 +10,13 @@ export const fetchProducts = async (params?: PagingParams) => {
       skip: offset,
       take: params.pageSize,
       orderBy: { created_at: 'desc' },
+      include: { categories: true },
     })
+    params.totalCount = await db.product.count({where: { deleted_at: null }})
     params.data = result
     return params
   }
-  const result = await db.product.findMany({ where: { deleted_at: null } })
+  const result = await db.product.findMany({ where: { deleted_at: null }, include: { categories: true } })
   return result
 }
 
