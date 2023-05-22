@@ -1,5 +1,6 @@
 import { Order as OrderModel, Order_Item as OrderItemModel } from '@prisma/client'
 import { Order, OrderEntity } from '../../types'
+import { mapOrderItemFromOrderItemModel } from './order.item.mappers'
 
 export const mapOrderEntityFromOrder = (order: Order): OrderEntity => {
   return {
@@ -23,5 +24,8 @@ export const mapOrderFromOrderModel = ( model: (OrderModel & { orderItems: Order
     customerFirstName: model.customer_first_name,
     customerLastName: model.customer_last_name,
     customerPhoneNumber: model.customer_last_name,
+    orderItems: (model as OrderModel & { order_items: OrderItemModel[] }).order_items ? (model as OrderModel & { order_items: OrderItemModel[] }).order_items.map((orderItem) =>
+    mapOrderItemFromOrderItemModel(orderItem)
+  ) : undefined,
   }
 }
