@@ -8,6 +8,7 @@ const helmet = require('koa-helmet')
 import cors from '@koa/cors'
 
 // Modules
+import apiRouter from '../routers/main.router'
 import { errorEmitter, errorHandler } from '../middleware'
 
 export const app = new Koa()
@@ -30,4 +31,6 @@ app
     .use(bodyParser({ jsonLimit: '50mb' }))
     .use(router.routes())
     .use(router.allowedMethods())
+    .use(apiRouter.routes())
+    .use(apiRouter.allowedMethods())
     .on('error', errorHandler)

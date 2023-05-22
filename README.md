@@ -1,6 +1,6 @@
 # API Service
 
-The API layer that handles backend functions. This node backend is initiated utilizes a postgres database within a Docker Image
+The API layer that handles backend functions. This node backend utilizes a postgres database within a Docker Image
 
 ## Dependencies
 

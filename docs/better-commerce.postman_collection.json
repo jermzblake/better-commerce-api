@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "9a1f7c21-0f86-4076-bebd-9a9ed50153fd",
+		"name": "better-commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17396798"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "create product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{ec-api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n      \"name\": \"test\",\n      \"description\": \"this is a test product\",\n      \"quantity\": 100,\n      \"price\": 6.99,\n      \"size\": \"medium\",\n      \"categories\": [{\"name\": \"unisex\"}]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/products",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products"
+							]
+						},
+						"description": "optional property of categories\n\n`\"categories\": [{name: 'unisex'}],`"
+					},
+					"response": []
+				},
+				{
+					"name": "get products",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{ec-api-key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/products?page=1&pageSize=5&dir=desc&sort=created_at",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "5"
+								},
+								{
+									"key": "dir",
+									"value": "desc"
+								},
+								{
+									"key": "sort",
+									"value": "created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get product by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{ec-api-key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/products/{{productId}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{ec-api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"updated product\",\n    \"categories\": [{\"name\": \"unisex\"}]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/products/{{productId}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "increase product quantity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{ec-api-key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/products/{{productId}}/increase/3",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products",
+								"{{productId}}",
+								"increase",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "decrease product quantity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{ec-api-key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/products/{{productId}}/decrease/3",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products",
+								"{{productId}}",
+								"decrease",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{ec-api-key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/products/{{productId}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "create order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{ec-api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customerEmail\": \"test@email.com\",\n    \"customerFirstName\": \"Test\",\n    \"customerLastName\": \"Tester\",\n    \"totalAmount\": 50,\n    \"orderItems\": [{\"productId\": \"clgs151c40001t729co7agqf7\", \"quantity\": 2}, {\"productId\": \"clgohn58e0004t7lhq8cuoctu\", \"quantity\": 1}]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/orders",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get order by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{ec-api-key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/orders/{{orderId}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"orders",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{ec-api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"shippingAddress\": {\"street\": \"123 Abc Street\", \"city\":\"Hamilton\", \"region\": \"Ontario\", \"country\": \"Canada\", \"code\": \"L8K 6H8\", \"suite\": \"\"}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/orders/{{orderId}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"orders",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete order",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{ec-api-key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/orders/{{orderId}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"orders",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
