@@ -7,6 +7,12 @@ export const createOrder = async (ctx: Context) => {
   ctx.body = order
 }
 
+export const getOrder = async (ctx: Context) => {
+  const { orderId } = ctx.params
+  const order = await orderService.findOrderById(orderId)
+  ctx.body = order 
+}
+
 export const updateOrder = async (ctx: Context) => {
   const { orderId } = ctx.params
   const updatedOrder =  await orderService.updateOrder(orderId, ctx.request.body as Order)
