@@ -6,6 +6,7 @@ import { authMiddleware } from '../middleware'
 /* IMPORT ROUTERS BELOW */
 import ProductRouter from './product/product.router'
 import OrderRouter from './order/order.router'
+import MemberRouter from './member/member.router'
 
 const router = new Router({
     prefix: '/api'
@@ -43,5 +44,7 @@ router
    .use(ProductRouter.allowedMethods())
    .use(OrderRouter.routes())
    .use(OrderRouter.allowedMethods())
+   .use(MemberRouter.routes())
+   .use(MemberRouter.allowedMethods())
 
 export default router
