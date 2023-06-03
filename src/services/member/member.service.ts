@@ -3,8 +3,12 @@ import { Member as MemberModel } from '@prisma/client'
 import * as memberRepository from '../../repositories/member/member.repository'
 import { NotFoundError } from '../../lib'
 import { mapMemberFromMemberModel, mapMemberEntityFromMember } from '../../dataMappers/member/member.mappers'
+import { hashPassword } from '../../services/admin/security.service'
 
 export const createMember = async (member: Member) => {
+  if (member.password) {
+    member.passwordHash = hashPassword(member.password)
+  }
   const MemberEntity = mapMemberEntityFromMember(member)
   const db_response: MemberModel = await memberRepository.createMember(MemberEntity)
   return mapMemberFromMemberModel(db_response)
