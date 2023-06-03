@@ -15,12 +15,19 @@ model Member {
   email String @unique  @db.VarChar(255)
   first_name String  @db.VarChar(255)
   last_name String  @db.VarChar(255)
-  password_hash String  @db.VarChar(255)
+  password_hash String?  @db.VarChar(255)
   phone_number String?  @db.VarChar(50)
+  auth_type AuthType
+  sso_type String? @db.VarChar(255)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   deleted_at DateTime?
   orders Order[]
+}
+
+enum AuthType {
+  sso
+  creds
 }
 
 model Order {
