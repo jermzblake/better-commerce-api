@@ -7,6 +7,7 @@ export interface Member extends BusinessObject {
   firstName: string
   lastName: string
   phoneNumber?: string
+  password?: string
   passwordHash?: string
   authType: AuthType
   ssoType?: string
