@@ -12,7 +12,8 @@
     "migrate:dev": "yarn prisma migrate dev --name $1",
     "migrate:reset": "yarn prisma migrate reset",
     "migrate:prod": "yarn prisma migrate deploy",
-    "migrate:create-only": "yarn prisma migrate dev --create-only"
+    "migrate:create-only": "yarn prisma migrate dev --create-only",
+    "seed": "ts-node ./src/utils/seed.ts"
   },
   "dependencies": {
     "@koa/cors": "^4.0.0",
