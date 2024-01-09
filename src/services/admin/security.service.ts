@@ -14,9 +14,18 @@ export const getValueFromJwt = (token: string) => {
 
 }
 
-/* password hashing */
+/* Password handling */
 export const hashPassword = (password: string) => {
     return bcrypt.hashSync(password, SALT_ROUNDS)
+}
+
+export const comparePassword = (tryPassword: string, hashedPassword: string) => {
+    return bcrypt.compare(tryPassword, hashedPassword, (err, result) => {
+        if (err) {
+            throw err
+        }
+        return result
+    })
 }
 
 /* Encode and Decode can be used to implement encrypt/decrypt methods */
