@@ -3,8 +3,13 @@ import { Order as OrderModel } from '@prisma/client'
 import { OrderEntity, OrderItemEntity, PagingParams } from '../../types'
 
 export const createOrder = async (order: OrderEntity, orderItems?: OrderItemEntity[]) => {
-  const result = await db.order.create({ data: { ...order, order_items: { connect: orderItems } } })
-  return result
+  try {
+    const result = await db.order.create({ data: { ...order, order_items: { connect: orderItems } } })
+    return result
+  } catch (error: any) {
+    console.log(new Error(error))
+    throw new Error(error)
+  }
 }
 
 export const fetchOrders = async (params?: PagingParams) => {
