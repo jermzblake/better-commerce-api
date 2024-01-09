@@ -15,7 +15,7 @@ export const createOrder = async (order: Order): Promise<Order> => {
   for (const item of pendingOrderItems as OrderItem[]) {
     const product = await findProductById(item.productId)
     if (!product.quantity || product.quantity <= 0) {
-      throw new NotFoundError(__filename, `Product no longer available`)
+      throw new NotFoundError(__filename, `Product ${product.name} no longer available`)
     } else if ((product.quantity as number) < item.quantity) {
       //TODO handle this scenario other than throwing an exception
       throw new BadRequestError(__filename, `There are not enough products with ID ${product.id} to fulfil your order`)
