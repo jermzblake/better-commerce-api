@@ -7,5 +7,7 @@ set -e
 # Feel free to add migrations or whatever here
 # yarn migrate:dev init
 # In production don't run migrate:dev BUT do run migrate:prod
+echo "Running yarn migrate:prod"
 yarn migrate:prod
+echo "Running yarn start"
 yarn start
