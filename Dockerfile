@@ -35,5 +35,7 @@ RUN yarn global add typescript && \
     yarn build && \
     ls
 
+RUN chmod +x /usr/src/app/entrypoint.sh
+
 EXPOSE 5000
 ENTRYPOINT ["/bin/bash", "-c", "./entrypoint.sh"]
