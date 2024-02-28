@@ -37,3 +37,6 @@ Runs all the database migrations
 Runs the API in dev mode. This uses `nodemon` to watch files and recompile and restart the server
 
 ### `start http://localhost:4000`
+
+## LIVE DEMO
+[live API](https://better-commerce-api.onrender.com)
